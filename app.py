@@ -236,8 +236,8 @@ if latest:
 if st.session_state.get("force_nav"):
     st.session_state.nav_choice = st.session_state.pop("force_nav")
 
-NAV_ITEMS = ["내 종목", "계좌 연결", "교육자료", "설정"]
-legacy = {"통합 분석":"내 종목", "홈":"내 종목", "AI 인사이트":"내 종목", "관심 종목":"내 종목", "포트폴리오":"계좌 연결"}
+NAV_ITEMS = ["대시보드", "내 종목", "계좌 연결", "교육자료", "설정"]
+legacy = {"통합 분석":"내 종목", "홈":"대시보드", "AI 인사이트":"내 종목", "관심 종목":"내 종목", "포트폴리오":"계좌 연결"}
 current = st.session_state.get("nav_choice", "내 종목")
 if current not in NAV_ITEMS:
     st.session_state.nav_choice = legacy.get(current, "설정")
@@ -717,7 +717,9 @@ def render_placeholder(title, subtitle, required):
                 st.caption(cap)
 
 
-if nav == "내 종목":
+if nav == "대시보드":
+    render_home()
+elif nav == "내 종목":
     render_research(store, state, sample_mode)
 elif nav == "계좌 연결":
     render_portfolio(store, sample_mode)
